@@ -5,7 +5,7 @@ namespace LAFramework\Container;
 /**
  * main config for all project
  */
-class config 
+class Config 
 {
     /**
      *
