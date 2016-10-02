@@ -20,16 +20,23 @@ class Route {
      * @var \HttpFoundation\Request 
      */
     private $request;
+    /**
+     *
+     * @var string 
+     */
+    private $routePath;
     
     /**
      * 
      * @param Request $request
      */
-    public function __construct(Request $request) {
+    public function __construct(Request $request, $routePath) {
         
         $this->request = $request;
         
-        $this->routelist = include 'routing/route.php';
+        $this->routePath = $routePath;
+        
+        $this->routelist = include  $this->routePath;
     }
     
     /**

@@ -24,6 +24,12 @@ class Doctrine {
     
     /**
      *
+     * @var bool 
+     */
+    private $dbenable;
+    
+    /**
+     *
      * @var \Doctrine\ORM\EntityManager
      */
     private $entityManager;
@@ -33,17 +39,23 @@ class Doctrine {
      * @param array $dataBaseParams
      * @param string $entityPath
      */
-    public function __construct($dataBaseParams, $entityPath) {
+    public function __construct($dataBaseParams, $entityPath, $dbenable) {
         
-        $this->dataBaseParams = $dataBaseParams;
+        $this->dbenable = $dbenable;
         
-        $this->entityManager = $entityPath;
+        if ($this->dbenable) {
         
-        $isDevMode = true;
+            $this->dataBaseParams = $dataBaseParams;
+
+            $this->entityManager = $entityPath;
+
+            $isDevMode = true;
+
+            $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
+
+            $this->entityManager = EntityManager::create($this->dataBaseParams, $config);
         
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
-        
-        $this->entityManager = EntityManager::create($this->dataBaseParams, $config);
+        }
         
         
     }

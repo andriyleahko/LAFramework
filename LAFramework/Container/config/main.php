@@ -29,6 +29,9 @@ return [
             'request' => [
                 'type' => 'object',
                 'value' => 'request'
+            ],
+            'routePath' => [
+                'value' => 'config/routing/route.php'
             ]
         ]
     ],
@@ -36,10 +39,10 @@ return [
         'class' => '\LAFramework\View\View',
         'params' => [
             'templatePath' => [
-                'value' => 'template/'
+                'value' => '%templatePath%'
             ],
             'baseTmpl' => [
-                'value' => 'main'
+                'value' => '%baseTmpl%'
             ]
         ]
     ],

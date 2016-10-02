@@ -6,15 +6,18 @@ return [
         'params' => [
             'dataBaseParams' => [
                 'value' => [
-                    'host' => 'localhost',
-                    'driver'   => 'pdo_mysql',
-                    'user'     => 'root',
-                    'password' => 'root',
-                    'dbname'   => 'doctrine_test',
+                    'host' => '%dbhost%',
+                    'driver'   => '%dbdriver%',
+                    'user'     => '%dbuser%',
+                    'password' => '%dbpass%',
+                    'dbname'   => '%dbname%',
                 ]
             ],
             'entityPath' => [
                 'value' => 'Entity'
+            ],
+            'dbenable' => [
+                'value' => '%dbenable%'
             ],
 
         ],

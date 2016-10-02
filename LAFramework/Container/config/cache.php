@@ -5,10 +5,10 @@ return [
         'class' => '\LAFramework\Cache\Adapter\MemCache',
         'params' => [
             'host' => [
-                'value' => '127.0.0.1'
+                'value' => '%memcacheHost%'
             ],
             'port' => [
-                'value' => '11211'
+                'value' => '%memcachePort%'
             ]
         ],
     ],
@@ -16,7 +16,7 @@ return [
         'class' => '\LAFramework\Cache\Adapter\FileCache',
         'params' => [
             'path' => [
-                'value' => 'tmp'
+                'value' => '%filecachePath%'
             ],
         ],
     ],
@@ -24,13 +24,13 @@ return [
         'class' => '\LAFramework\Cache\Adapter\RedisCache',
         'params' => [
             'host' => [
-                'value' => '127.0.0.1'
+                'value' => '%redisHost%'
             ],
             'port' => [
-                'value' => '6379'
+                'value' => '%redisPort%'
             ],
             'pass' => [
-                'value' => 'foobared'
+                'value' => '%redisPass%'
             ],
         ],
     ],
@@ -39,9 +39,8 @@ return [
         'params' => [
             'adapter' => [
                 'type' => 'object',
-                'value' => 'memCache'
+                'value' => '%cachedriver%'
             ]
         ]
     ],
 ];
-

@@ -4,17 +4,8 @@ return [
         'class' => '\LAFramework\Dispatcher\Dispatcher',
         'params' => [
             'events' => [
-                /**
-                 * @example
-                 *
-                'value' => [
-                    'onKeyEvent' => [
-                        'component' => 'componentName',
-                        'method' => 'methodName'
-                    ]
-                ]
-                 * 
-                 */
+                'value' => '%events%'
+
             ]
         ]
     ],
