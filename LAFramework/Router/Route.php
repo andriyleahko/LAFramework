@@ -29,7 +29,7 @@ class Route {
         
         $this->request = $request;
         
-        $this->routelist = include 'config/routing/route.php';
+        $this->routelist = include 'routing/route.php';
     }
     
     /**

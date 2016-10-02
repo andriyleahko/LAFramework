@@ -23,10 +23,11 @@ class Config
      */
     public static function getConfig() {
         
-        if (!file_exists(self::$config)) {
-            self::$config = __DIR__ . '/config';
-        }
+        
         if (self::$config == null) {
+            if (!file_exists(self::$configPath)) {
+                self::$configPath = __DIR__ . '/config';
+            }
             $configsFile = scandir(self::$configPath);
 
             $configRes = ['components'=>[]];
