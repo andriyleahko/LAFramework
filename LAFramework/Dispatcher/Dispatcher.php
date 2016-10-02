@@ -2,6 +2,8 @@
 
 namespace LAFramework\Dispatcher;
 
+use LAFramework\Container\Container;
+
 /**
  * dispatcher event
  */
@@ -23,7 +25,7 @@ class Dispatcher {
         
         $this->events = $events;
         
-        $this->container = \Container\Container::init();
+        $this->container = Container::init();
         
     }
     
