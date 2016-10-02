@@ -16,13 +16,16 @@ class Config
      * @var array
      */
     private static $config = null;
-    
-    
+       
+
     /**
      * @return array Description
      */
     public static function getConfig() {
         
+        if (!file_exists(self::$config)) {
+            self::$config = __DIR__ . '/config';
+        }
         if (self::$config == null) {
             $configsFile = scandir(self::$configPath);
 
