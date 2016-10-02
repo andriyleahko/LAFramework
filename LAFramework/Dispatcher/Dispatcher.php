@@ -5,7 +5,7 @@ namespace LAFramework\Dispatcher;
 /**
  * dispatcher event
  */
-class dispatcher {
+class Dispatcher {
     
     /**
      * all event and listeners
