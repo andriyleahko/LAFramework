@@ -12,7 +12,7 @@ return [
                 ]
             ],
             'customValidationClasses' => [
-                'value' => '%customvalidationClasses%'
+                'value' => '%customValidationClasses%'
             ],
             'clearClasses' => [
                 'value' => [
@@ -20,7 +20,7 @@ return [
                 ]
             ],
             'clearCustomClasses' => [
-                'value' => '%customvalidationClasses%'
+                'value' => '%customClearClasses%'
             ]
             
         ],
