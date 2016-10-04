@@ -43,9 +43,7 @@ class Request {
      */
     public function isPost() {
         
-        /**
-         * @todo
-         */
+        return (count($_POST) > 0);
         
     }
     
@@ -53,9 +51,8 @@ class Request {
      * @return bool
      */
     public function isAjax() {
-        /**
-         * @todo
-         */
+        
+        return (isset($this->getServerData('HTTP_X_REQUESTED_WITH')) && !empty($this->getServerData('HTTP_X_REQUESTED_WITH')) && strtolower($this->getServerData('HTTP_X_REQUESTED_WITH')) == 'xmlhttprequest');
     }
     
     /**
