@@ -85,33 +85,41 @@ class Validation {
         $this->customValidationClasses = $customValidationClasses;
         
         foreach ($this->validationClasses as $key => $classes) {
+            $classes = new $classes;
             if ($classes instanceof IValid) {
-                $this->validationObjects[$key] = new $classes;
+                $this->validationObjects[$key] = $classes;
             }
         }
         
+        
+        
         if (is_array($this->customValidationClasses)) {
             foreach ($this->customValidationClasses as $key => $classes) {
+                $classes = new $classes;
                 if ($classes instanceof IValid) {
-                    $this->validationObjects[$key] = new $classes;
+                    $this->validationObjects[$key] = $classes;
                 }
                 
             }
         }
         
+        
         $this->clearClasses = $clearClasses;
         $this->clearCustomClasses = $clearCustomClasses;
         
         foreach ($this->clearClasses as $key => $classes) {
+            $classes = new $classes;
             if ($classes instanceof IClear) {
-                $this->clearObjects[$key] = new $classes;
+                $this->clearObjects[$key] = $classes;
             }
         }
         
+        
         if (is_array($this->clearCustomClasses)) {
             foreach ($this->clearCustomClasses as $key => $classes) {
+                $classes = new $classes;
                 if ($classes instanceof IClear) {
-                    $this->clearObjects[$key] = new $classes;
+                    $this->clearObjects[$key] = $classes;
                 }
                 
             }
@@ -156,14 +164,11 @@ class Validation {
                 $clears = $this->clearRules[$key];
                 
                 if (count($rules) > 0) {
-                    foreach ($rules as $rule) {
+                    foreach ($rules as $ruleKey => $rule) {
                         $option = null;
                         if (is_array($rule)) {
-                            foreach ($rule as $k => $v) {
-                                $rule = $k;
-                                $option = $v;
-                                break;
-                            }
+                            $option = $rule;                              
+                            $rule = $ruleKey;
                         }
                         $validData = $this->validationObjects[$rule]->validate($var, $key, $option);
                         if (!$validData['success']) {
