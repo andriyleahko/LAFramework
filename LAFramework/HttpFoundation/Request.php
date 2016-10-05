@@ -52,7 +52,7 @@ class Request {
      */
     public function isAjax() {
         
-        return (isset($this->getServerData('HTTP_X_REQUESTED_WITH')) && !empty($this->getServerData('HTTP_X_REQUESTED_WITH')) && strtolower($this->getServerData('HTTP_X_REQUESTED_WITH')) == 'xmlhttprequest');
+        return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
     }
     
     /**
