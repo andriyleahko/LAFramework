@@ -135,7 +135,7 @@ class Validation {
      */
     public function setRule($rule) {
         
-        $this->rule = $rule;
+        $this->rules = $rule;
     }
 
     /**
@@ -144,7 +144,7 @@ class Validation {
      */
     public function clearRule($rule) {
         
-        $this->clearRule = $rule;
+        $this->clearRules = $rule;
           
     }
 
