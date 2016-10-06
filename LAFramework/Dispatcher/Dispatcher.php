@@ -14,6 +14,11 @@ class Dispatcher {
      * @var array 
      */
     public $events;
+    /**
+     * all event and listeners
+     * @var array 
+     */
+    public $baseEvents;
     
     /**
      *
@@ -21,9 +26,12 @@ class Dispatcher {
      */
     private $container;
 
-    public function __construct($events) {
+    public function __construct($events, $baseEvents) {
         
-        $this->events = $events;
+        $this->baseEvents = $baseEvents;
+        
+        $this->events = array_merge($events, $baseEvents);
+        
         
         $this->container = Container::init();
         

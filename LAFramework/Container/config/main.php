@@ -10,6 +10,9 @@ return [
     'response' => [
         'class' => '\LAFramework\HttpFoundation\Response',
     ],
+    'session' => [
+        'class' => '\LAFramework\Session\Session',
+    ],
     'processor' => [
         'class' => '\LAFramework\Processor\Processor',
         'params' => [
@@ -20,6 +23,14 @@ return [
             'request' => [
                 'type' => 'object',
                 'value' => 'request'
+            ],
+            'session' => [
+                'type' => 'object',
+                'value' => 'session'
+            ],
+            'dispatcher' => [
+                'type' => 'object',
+                'value' => 'dispatcher'
             ]
         ]
     ],

@@ -3,6 +3,7 @@
 namespace LAFramework\Processor;
 
 use LAFramework\Router\Route;
+use LAFramework\Session\Session;
 use LAFramework\HttpFoundation\Request;
 
 /**
@@ -12,15 +13,27 @@ class Processor {
     
     /**
      *
-     * @var \Router\Route 
+     * @var \LAFramework\Router\Route 
      */
     private $route;
     
     /**
      *
-     * @var \HttpFoundation\Request
+     * @var \LAFramework\HttpFoundation\Request
      */
     private $request;
+    
+    /**
+     *
+     * @var \LAFramework\Session\Session
+     */
+    private $session;
+    
+    /**
+     *
+     * @var \LAFramework\Dispatcher\Dispatcher
+     */
+    private $dispatcher;
     
 
 
@@ -29,9 +42,13 @@ class Processor {
      * @param Route $route
      * @param Request $request
      */
-    public function __construct(Route $route, Request $request) {
+    public function __construct(Route $route, Request $request, Session $session, Dispatcher $dispatcher) {
         $this->route = $route;
         $this->request = $request;
+        $this->session = $session;
+        $this->dispatcher = $dispatcher;
+        
+        $this->session->start();
     }
     
     /**
@@ -41,6 +58,8 @@ class Processor {
     public function resolve() {
         
         $data = $this->route->resolveRoute();
+        
+        $this->dispatcher->dispatch('onRequest', $data);
         
         $controllerData = $data['controllerData'];
         $controllerKey = $data['routeKey'];
