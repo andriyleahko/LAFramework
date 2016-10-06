@@ -18,7 +18,6 @@ return [
             'paths' => [
                 'value' => [
                     'login' => '/login',
-                    'logout' => '/logout'
                 ]
             ],
             'auth' => [

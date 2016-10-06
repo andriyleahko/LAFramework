@@ -1,8 +1,12 @@
 <?php
 
 return [
-    'onRequest' => [
+    'ifRequestAuth' => [
         'component' => 'firewallProcessor',
-        'method' => 'onRequest'
+        'method' => 'ifRequestAuth'
+    ],
+    'firewallProcess' => [
+        'component' => 'firewallProcessor',
+        'method' => 'firewallProcess'
     ]
 ];

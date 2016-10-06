@@ -58,9 +58,11 @@ class Processor {
      */
     public function resolve() {
         
+        $this->dispatcher->dispatch('ifRequestAuth', $this->request->getServerData('REQUEST_URI'));
+        
         $data = $this->route->resolveRoute();
         
-        $this->dispatcher->dispatch('onRequest', $data);
+        $this->dispatcher->dispatch('firewallProcess', $data);
         
         $controllerData = $data['controllerData'];
         $controllerKey = $data['routeKey'];

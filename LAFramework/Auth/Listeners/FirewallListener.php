@@ -23,13 +23,28 @@ class FirewallListener {
     
     /**
      * 
+     * @param string $uri
+     */
+    public function ifRequestAuth($uri) {
+        
+        if ($uri == $this->firewall->paths['login']) {
+            $this->firewall->auth->auth();
+        }
+        
+        if ($uri == $this->firewall->paths['logout']) {
+            $this->firewall->auth->logout();
+        } 
+        
+    }
+    /**
+     * 
      * @param array $data
      */
-    public function onRequest($data) {
+    public function firewallProcess($data) {
         
-        dump($data);
-        dump($this->firewall);
-        
+        /**
+         * @todo check rule for route
+         */
         
     }
     

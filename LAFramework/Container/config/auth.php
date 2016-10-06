@@ -23,6 +23,15 @@ return [
                 'type' => 'object',
                 'value' => 'request'
             ],
+            'authHandler' => [
+                'type' => 'object',
+                'value' => '%authHandler%'
+            ],
+            'passCrypt' => [
+                'type' => 'object',
+                'value' => '%passCrypt%'
+            ]
+            
             
         ],
     ],
