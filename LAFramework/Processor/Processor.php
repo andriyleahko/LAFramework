@@ -5,6 +5,7 @@ namespace LAFramework\Processor;
 use LAFramework\Router\Route;
 use LAFramework\Session\Session;
 use LAFramework\HttpFoundation\Request;
+use LAFramework\Dispatcher\Dispatcher;
 
 /**
  * class for resolve browser request

@@ -1,6 +1,6 @@
 <?php
 
-namespace LAFramework\Session\Session;
+namespace LAFramework\Session;
 
 class Session {
     

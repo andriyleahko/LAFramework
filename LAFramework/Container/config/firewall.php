@@ -22,10 +22,8 @@ return [
                 ]
             ],
             'auth' => [
-                'value' => [
-                    'type' => 'object',
-                    'value' => 'auth'
-                ]
+                'type' => 'object',
+                'value' => 'auth'
             ]
         ],
     ],

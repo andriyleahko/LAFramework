@@ -2,7 +2,7 @@
 
 return [
     'firewallProcessor' => [
-        'class' => '\LAFramework\Auth\Listeners\Firewall',
+        'class' => '\LAFramework\Auth\Listeners\FirewallListener',
         'params' => [
             'firewall' => [
                 'type' => 'object',
