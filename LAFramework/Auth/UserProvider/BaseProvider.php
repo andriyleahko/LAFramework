@@ -21,8 +21,13 @@ class BaseProvider {
         $this->adapter = $adapter;
     }
     
-    public function getUserByEmail() {
-        ;
+    /**
+     * 
+     * @param string $user
+     * @return array | null
+     */
+    public function getUserByEmail($user) {
+        return $this->adapter->getUserByEmail($user);
     }
     
     

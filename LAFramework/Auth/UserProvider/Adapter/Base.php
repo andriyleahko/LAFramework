@@ -29,8 +29,26 @@ class Base implements IProvider {
         $this->doctrine = $doctrine;
     }
     
-    public function getUserByEmail() {
-        ;
+    /**
+     * 
+     * @param string $user
+     * @return null | array $user
+     */
+    public function getUserByEmail($user) {
+        $user = $this->doctrine->getEntityManager()->getRepository($this->table)->findOneBy(['username' => $user]);
+        
+        if ($user) {
+            
+            return [
+                'username' => $user->getUsername(),
+                'pass' => $user->getPass(),
+                'roles' => $user->getRoles(),
+                'userObject' => $user
+            ];
+            
+        } 
+        
+        return null;
     }
     
     

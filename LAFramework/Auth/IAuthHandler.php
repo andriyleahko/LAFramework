@@ -5,7 +5,13 @@ namespace LAFramework\Auth;
 interface IAuthHandler {
     
     public function onSuccess();
-    public function onFail();
+    
+    /**
+     * 
+     * @param string $message
+     */
+    public function onFail($message);
+    
     public function onUserIsAuth();
     
 }

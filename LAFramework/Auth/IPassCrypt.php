@@ -4,6 +4,11 @@ namespace LAFramework\Auth;
 
 interface IPassCrypt {
     
-    public function crypt();
+    /**
+     * 
+     * @param string $pass
+     * @reyurn string
+     */
+    public function crypt($pass);
     
 }

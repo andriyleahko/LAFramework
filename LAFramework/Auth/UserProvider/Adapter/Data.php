@@ -21,8 +21,21 @@ class Data implements IProvider {
         $this->data = $data;
     }
     
-    public function getUserByEmail() {
-        ;
+    /**
+     * 
+     * @param string $user
+     * @return null | array $user
+     */
+    public function getUserByEmail($user) {
+        
+        foreach ($this->data as $dataUser) {
+            
+            if ($dataUser['username'] == $user) {
+                return $dataUser;
+            }
+        }
+        
+        return null;
     }
     
     

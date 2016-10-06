@@ -10,6 +10,7 @@ class Response {
     
     const JSONTYPE = 1;
     const HTMLTYPE = 2;
+    const REDIRECT = 3;
 
     /**
      *
@@ -48,10 +49,20 @@ class Response {
     
     /**
      * 
+     * @param string $uri
+     */
+    public function setRedirectResponse($uri) {
+        $this->type = self::REDIRECT;
+        $this->response = $uri;
+        
+    }
+
+        /**
+     * 
      * @param string $url
      * @return bool
      */
-    public function redirect($url) {
+    private function redirect($url) {
         header("Location: {$url}");
         return;
         
@@ -75,6 +86,11 @@ class Response {
         
         if ($this->type == self::JSONTYPE) {
             echo json_encode($this->response);
+            return;
+        }
+        
+        if ($this->type == self::REDIRECT) {
+            $this->redirect($this->response);
             return;
         }
         

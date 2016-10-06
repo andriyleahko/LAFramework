@@ -31,9 +31,6 @@ class FirewallListener {
             $this->firewall->auth->auth();
         }
         
-        if ($uri == $this->firewall->paths['logout']) {
-            $this->firewall->auth->logout();
-        } 
         
     }
     /**

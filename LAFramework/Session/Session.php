@@ -16,15 +16,35 @@ class Session {
         session_destroy();
     }
     
+    /**
+     * 
+     * @param string $key
+     * @param string $value
+     */
     public function setData($key, $value) {
         
-    }
-    
-    public function getData($key) {
+        $_SESSION[$key] = $value; 
         
     }
     
+    /**
+     * 
+     * @param string $key
+     * @return mixed
+     */
+    public function getData($key) {
+        
+        return (isset($_SESSION[$key])) ? $_SESSION[$key] : false; 
+        
+    }
+    
+    /**
+     * 
+     * @return array
+     */
     public function getAll() {
+        
+        return $_SESSION;
         
     }
     

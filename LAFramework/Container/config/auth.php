@@ -30,6 +30,10 @@ return [
             'passCrypt' => [
                 'type' => 'object',
                 'value' => '%passCrypt%'
+            ],
+            'baseAuthProvider' => [
+                'type' => 'object',
+                'value' => 'baseAuthProvider'
             ]
             
             

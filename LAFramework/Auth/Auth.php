@@ -7,6 +7,7 @@ use LAFramework\Session\Session;
 use LAFramework\HttpFoundation\Request;
 use LAFramework\Auth\IAuthHandler;
 use LAFramework\Auth\IPassCrypt;
+use LAFramework\Auth\UserProvider\BaseProvider;
 
 
 class Auth {
@@ -31,35 +32,77 @@ class Auth {
      * @var \LAFramework\Auth\IPassCrypt
      */
     private $passCrypt;
+    /**
+     *
+     * @var \LAFramework\Auth\UserProvider\BaseProvider
+     */
+    private $baseAuthProvider;
     
     /**
      * 
      * @param Session $session
      * @param Request $request
      */
-    public function __construct(Session $session, Request $request, IAuthHandler $authHandler, IPassCrypt $passCrypt) {
+    public function __construct(Session $session, Request $request, IAuthHandler $authHandler, IPassCrypt $passCrypt, BaseProvider $baseAuthProvider) {
         $this->session = $session;
         $this->request = $request;
         
         $this->authHandler = $authHandler;
         $this->passCrypt = $passCrypt;
+        $this->baseAuthProvider = $baseAuthProvider;
                 
     }
     
     public function isAuth() {
         
-    }
-    
-    public function getUser() {
+        return $this->session->getData('user');
         
     }
     
+    /**
+     * 
+     * @return array
+     */
+    public function getAuthUser() {
+        
+        return $this->session->getData('user');
+        
+    }
+    
+    /**
+     * 
+     * @return bool
+     */
     public function auth() {
         
+        if ($this->request->isPost() and $this->request->getPost('username') and $this->request->getPost('pass')) {
+            
+            if ($this->isAuth()) {
+                $this->authHandler->onUserIsAuth();
+            }
+            
+            $user = $this->baseAuthProvider->getUserByEmail($this->request->getPost('username'));
+            
+            if ($user and $user['pass'] == $this->passCrypt($user['pass'])) {
+               $this->session->setData('isAuth', 1);
+               $this->session->setData('user', $user);
+               $this->authHandler->onSuccess(); 
+            } else {
+               $this->authHandler->onFail('Bad credential'); 
+            }
+            
+        }
+        
+        return;
+        
     }
     
+
+    /**
+     * @return bool
+     */
     public function loguot() {
-        $this->session->stop();
+        return $this->session->stop();
     }
     
 
