@@ -39,9 +39,7 @@ class FirewallListener {
      */
     public function firewallProcess($data) {
         
-        /**
-         * @todo check rule for route
-         */
+        $this->firewall->checkRule($data);
         
     }
     
