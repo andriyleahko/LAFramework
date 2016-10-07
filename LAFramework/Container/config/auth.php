@@ -65,7 +65,7 @@ return [
         ],
     ],
     'userDataAdapter' => [
-        'class' => '\LAFramework\Auth\UserProvider\Adapter\Base',
+        'class' => '\LAFramework\Auth\UserProvider\Adapter\Data',
         'params' => [
             'data' => [
                 'value' => '%userData%'

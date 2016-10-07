@@ -62,6 +62,15 @@ class Request {
      */
     public function getServerData($key) {
         
+        if ($key == 'REQUEST_URI') {
+            $uri = explode('?', $_SERVER[$key]);
+            return $uri[0];
+        }
+        
+        if ($key == 'REQUEST_URI_AND_GET') {
+            return $_SERVER['REQUEST_URI'];
+        }
+        
         return ($key) ? $_SERVER[$key] : $_SERVER;
         
     }

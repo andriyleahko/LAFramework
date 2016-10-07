@@ -75,15 +75,15 @@ class Auth {
      */
     public function auth() {
         
+        if ($this->isAuth()) {
+            $this->authHandler->onUserIsAuth();
+        }
+        
         if ($this->request->isPost() and $this->request->getPost('username') and $this->request->getPost('pass')) {
-            
-            if ($this->isAuth()) {
-                $this->authHandler->onUserIsAuth();
-            }
             
             $user = $this->baseAuthProvider->getUserByEmail($this->request->getPost('username'));
             
-            if ($user and $user['pass'] == $this->passCrypt($user['pass'])) {
+            if ($user and $user['pass'] == $this->passCrypt->crypt($this->request->getPost('pass'))) {
                $this->session->setData('isAuth', 1);
                $this->session->setData('user', $user);
                $this->authHandler->onSuccess(); 
