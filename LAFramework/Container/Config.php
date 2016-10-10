@@ -108,7 +108,6 @@ class Config {
      */
     public static function getParam($key) {
 
-        $key = "%{$key}%";
         return self::$params[$key];
     }
 
