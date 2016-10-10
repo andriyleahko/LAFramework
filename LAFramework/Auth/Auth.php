@@ -101,7 +101,7 @@ class Auth {
     /**
      * @return bool
      */
-    public function loguot() {
+    public function logout() {
         return $this->session->stop();
     }
     

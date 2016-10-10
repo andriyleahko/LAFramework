@@ -6,15 +6,6 @@ use LAFramework\Auth\Auth;
 
 class Firewall {
     
-    /**
-     * @var array 
-     */
-    public $rules;
-    
-    /**
-     * @var array 
-     */
-    public $roles;
     
     /**
      * @var array 
@@ -32,11 +23,7 @@ class Firewall {
      * @param array $roles
      * @param array $paths
      */
-    public function __construct($rules, $roles, $paths, Auth $auth) {
-        
-        $this->rules = $rules;
-        
-        $this->roles = $roles;
+    public function __construct($paths, Auth $auth) {
         
         $this->paths = $paths;
         
@@ -55,6 +42,8 @@ class Firewall {
         $denied = (isset($roleRoute['denied'])) ? $roleRoute['denied'] : null; 
         $allow = (isset($roleRoute['allow'])) ? $roleRoute['allow'] : null; 
         
+
+        
         if (!$allow and !$denied) {
             return;
         }
@@ -62,6 +51,8 @@ class Firewall {
         if (!$this->auth->isAuth()) {
             $userRole = [];
         }
+        
+
         
         if (($this->auth->getAuthUser() and !isset($this->auth->getAuthUser()['role'])) 
                 or ($this->auth->getAuthUser() and isset($this->auth->getAuthUser()['role']) and $this->auth->getAuthUser()['role'] == null)
@@ -73,24 +64,24 @@ class Firewall {
             $userRole = $this->auth->getAuthUser()['role'];
         }
         
-        $userRole[] = 'Anonim';
+        $userRole[] = 'Anonim';       
         
+        if (is_array($denied)) {
+            foreach ($userRole as $ur) {
+                if (in_array($ur, $denied)) {
+                    throw new \Exception('you have not rule for run this route');
+                }
+            }
+        }
+
         if (is_array($allow)) {
             foreach ($userRole as $ur) {
-                if (in_array($ur, $userRole)) {
+                if (in_array($ur, $allow)) {
                     return;
                 }
             }
             
             throw new \Exception('you have not rule for run this route');
-        }
-        
-        if (is_array($denied)) {
-            foreach ($userRole as $ur) {
-                if (in_array($ur, $userRole)) {
-                    throw new \Exception('you have not rule for run this route');
-                }
-            }
         }
         
         return;
