@@ -58,12 +58,20 @@ class Route {
         foreach ($this->getRoute() as $key => $route) {
             $arrRoute = explode('/', $route['url']);
             $arrReqAux = explode('/',$this->request->getServerData('REQUEST_URI'));
-
-            $arrReq = array_splice($arrReqAux, 0, count($arrRoute));
             
+            $arrReq = array_splice($arrReqAux, 0, count($arrRoute));
             $requestUri = implode('/', $arrReq);
             
-            if ($route['url'] == $requestUri) {
+            $cntParamReq = 0;
+            $cntParamRt = 0;
+            
+            if (isset($route['params'])) {
+                $cntParamReqAux = explode('/',ltrim(str_replace($requestUri, '', $this->request->getServerData('REQUEST_URI')),'/'));
+                $cntParamReq = count(array_filter($cntParamReqAux, function($value) { return $value !== ''; }));
+                $cntParamRt = count(explode('/',$route['params']));
+            }           
+            
+            if ($route['url'] == $requestUri and $cntParamReq === $cntParamRt) {
                 $controllerData = $route;
                 $controllerKey = $key;
                 break;
