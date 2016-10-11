@@ -27,7 +27,7 @@ class NotAuthException extends \Exception implements IError  {
         if ($this->container->get('request')->isAjax()) {
             $this->container->get('response')->setJsonResponse(['message' => 'You do not auth']);
         } else {
-            $this->container->get('response')->setRedirectResponse($this->container->get('firewall')->paths['login']);
+            $this->container->get('response')->setRedirectResponse($this->container->get('firewall')->paths['login_form']);
         }
         
     }

@@ -3,6 +3,7 @@
 namespace LAFramework\Exceptions;
 
 use LAFramework\Container\Container;
+use LAFramework\Container\Config;
 
 class LAException {
     

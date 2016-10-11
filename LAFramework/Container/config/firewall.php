@@ -7,6 +7,7 @@ return [
             'paths' => [
                 'value' => [
                     'login' => '/login_check',
+                    'login_form' => '/login',
                 ]
             ],
             'auth' => [
