@@ -26,6 +26,7 @@ class NotFoundException extends \Exception implements IError  {
     
     public function genereError() {
        
+        header("HTTP/1.0 404 Not Found");
         $data = ['message' => $this->message, 'code' => $this->code];
         
         if ($this->container->get('request')->isAjax()) {

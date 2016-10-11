@@ -6,6 +6,7 @@ use LAFramework\Router\Route;
 use LAFramework\Session\Session;
 use LAFramework\HttpFoundation\Request;
 use LAFramework\Dispatcher\Dispatcher;
+use LAFramework\Exceptions\NotFoundException;
 
 /**
  * class for resolve browser request
@@ -68,17 +69,17 @@ class Processor {
         $controllerKey = $data['routeKey'];
         
         if (!$controllerData) {
-            throw new \Exception('route is not exists');
+            throw new NotFoundException('route is not exists');
         }
         
         if (!class_exists($controllerData['controller'])) {
-            throw new \Exception("class for route {$controllerKey} is not exists");
+            throw new NotFoundException("class for route {$controllerKey} is not exists");
         }
         
         $instance = new $controllerData['controller']();
         
         if (!method_exists($instance, $controllerData['method'])) {
-            throw new \Exception("method for route {$controllerKey} is not exists");
+            throw new NotFoundException("method for route {$controllerKey} is not exists");
         }
         
         $reflectClass = new \ReflectionClass($controllerData['controller']);
@@ -95,13 +96,13 @@ class Processor {
         
 
         if (count($paramsRoute) != count($paramsMethod) or count($arrParamValue) != count($paramsRoute) or count($arrParamValue) != count($paramsMethod)) {
-            throw new \Exception("mising route params");
+            throw new NotFoundException("mising route params");
         }
         
         
         foreach ($paramsMethod as $mParam) {
             if (!in_array($mParam->name, $paramsRoute)) {
-                throw new \Exception("param {$mParam->name} in route {$controllerKey} not exists");
+                throw new NotFoundException("param {$mParam->name} in route {$controllerKey} not exists");
             }
         }
         

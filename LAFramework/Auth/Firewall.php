@@ -3,6 +3,8 @@
 namespace LAFramework\Auth;
 
 use LAFramework\Auth\Auth;
+use LAFramework\Exceptions\DenyException;
+use LAFramework\Exceptions\NotAuthException;
 
 class Firewall {
     
@@ -52,6 +54,10 @@ class Firewall {
             $userRole = [];
         }
         
+        if (!$this->auth->isAuth() and is_array($denied) and in_array('Anonim', $denied)) {
+            throw new NotAuthException('you have not rule for run this route');
+        }
+        
 
         
         if (($this->auth->getAuthUser() and !isset($this->auth->getAuthUser()['role'])) 
@@ -69,7 +75,7 @@ class Firewall {
         if (is_array($denied)) {
             foreach ($userRole as $ur) {
                 if (in_array($ur, $denied)) {
-                    throw new \Exception('you have not rule for run this route');
+                    throw new DenyException('you have not rule for run this route');
                 }
             }
         }
@@ -81,7 +87,7 @@ class Firewall {
                 }
             }
             
-            throw new \Exception('you have not rule for run this route');
+            throw new DenyException('you have not rule for run this route');
         }
         
         return;

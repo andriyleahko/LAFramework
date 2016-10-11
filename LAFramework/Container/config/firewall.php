@@ -6,7 +6,7 @@ return [
         'params' => [
             'paths' => [
                 'value' => [
-                    'login' => '/login',
+                    'login' => '/login_check',
                 ]
             ],
             'auth' => [

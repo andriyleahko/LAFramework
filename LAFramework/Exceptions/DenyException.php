@@ -26,6 +26,7 @@ class DenyException extends \Exception implements IError {
     
     public function genereError() {
         
+        header("HTTP/1.1 403 Unauthorized");
         $data = ['message' => $this->message, 'code' => $this->code];
         
         if ($this->container->get('request')->isAjax()) {
