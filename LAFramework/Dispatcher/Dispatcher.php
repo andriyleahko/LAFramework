@@ -30,7 +30,14 @@ class Dispatcher {
         
         $this->baseEvents = $baseEvents;
         
-        $this->events = array_merge($events, $baseEvents);
+        $eventsMerge = array_merge($events, $baseEvents);
+        
+        $this->events = [];
+        if (count($eventsMerge)) {
+            foreach ($eventsMerge as $event) {
+                $this->events[$event['key']][] = $event;
+            }
+        }
         
         
         $this->container = Container::init();
@@ -47,16 +54,19 @@ class Dispatcher {
     public function dispatch($key, $data) {
         
         if (array_key_exists($key, $this->events)) {
+            
+            foreach ($this->events[$key] as $event) {
                 
-            $component = $this->events[$key]['component'];
+                $component = $event['component'];
 
-            $componentEntity = $this->container->get($component);
+                $componentEntity = $this->container->get($component);
 
-            if (!method_exists($componentEntity, $this->events[$key]['method'])) {
-                throw new \Exception('Method in listener does not found!');
+                if (!method_exists($componentEntity, $event['method'])) {
+                    throw new \Exception('Method in listener does not found!');
+                }
+
+                $componentEntity->{$event['method']}($data);
             }
-
-            $componentEntity->{$this->events[$key]['method']}($data);
                 
         }
     }

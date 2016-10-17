@@ -63,8 +63,6 @@ class Processor {
         
         $data = $this->route->resolveRoute();
         
-        $this->dispatcher->dispatch('firewallProcess', $data);
-        
         $controllerData = $data['controllerData'];
         $controllerKey = $data['routeKey'];
         
@@ -75,6 +73,8 @@ class Processor {
         if (!class_exists($controllerData['controller'])) {
             throw new NotFoundException("class for route {$controllerKey} is not exists");
         }
+        
+        $this->dispatcher->dispatch('firewallProcess', $data);
         
         $instance = new $controllerData['controller']();
         

@@ -1,11 +1,13 @@
 <?php
 
 return [
-    'ifRequestAuth' => [
+    [
+        'key' => 'ifRequestAuth',
         'component' => 'firewallProcessor',
         'method' => 'ifRequestAuth'
     ],
-    'firewallProcess' => [
+    [
+        'key' => 'firewallProcess',
         'component' => 'firewallProcessor',
         'method' => 'firewallProcess'
     ]

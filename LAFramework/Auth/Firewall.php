@@ -39,6 +39,10 @@ class Firewall {
      */
     public function checkRule($data) {
         
+        if (!array_key_exists('role', $data['controllerData'])){
+            return;
+        }
+        
         $roleRoute = $data['controllerData']['role'];
         
         $denied = (isset($roleRoute['denied'])) ? $roleRoute['denied'] : null; 
