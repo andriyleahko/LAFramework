@@ -31,7 +31,11 @@ return [
             'dispatcher' => [
                 'type' => 'object',
                 'value' => 'dispatcher'
-            ]
+            ],
+            'response' => [
+                'type' => 'object',
+                'value' => 'response'
+            ],
         ]
     ],
     'route' => [

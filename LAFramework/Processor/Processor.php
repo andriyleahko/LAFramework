@@ -5,6 +5,7 @@ namespace LAFramework\Processor;
 use LAFramework\Router\Route;
 use LAFramework\Session\Session;
 use LAFramework\HttpFoundation\Request;
+use LAFramework\HttpFoundation\Response;
 use LAFramework\Dispatcher\Dispatcher;
 use LAFramework\Exceptions\NotFoundException;
 
@@ -27,6 +28,12 @@ class Processor {
     
     /**
      *
+     * @var \LAFramework\HttpFoundation\Response
+     */
+    private $response;
+    
+    /**
+     *
      * @var \LAFramework\Session\Session
      */
     private $session;
@@ -44,9 +51,10 @@ class Processor {
      * @param Route $route
      * @param Request $request
      */
-    public function __construct(Route $route, Request $request, Session $session, Dispatcher $dispatcher) {
+    public function __construct(Route $route, Request $request, Session $session, Dispatcher $dispatcher, Response $response) {
         $this->route = $route;
         $this->request = $request;
+        $this->response = $response;
         $this->session = $session;
         $this->dispatcher = $dispatcher;
         
@@ -60,6 +68,10 @@ class Processor {
     public function resolve() {
         
         $this->dispatcher->dispatch('ifRequest', $this->request->getServerData('REQUEST_URI'));
+        
+        if ($this->response->isResponse()) {
+            return;
+        }
         
         $data = $this->route->resolveRoute();
         

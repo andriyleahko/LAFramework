@@ -28,6 +28,11 @@ class Response {
 
     }
     
+    
+    public function isResponse() {
+        return ($this->response !== null);
+    }
+
     /**
      * 
      * @param string $body
