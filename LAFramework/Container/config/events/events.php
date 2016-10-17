@@ -2,7 +2,7 @@
 
 return [
     [
-        'key' => 'ifRequestAuth',
+        'key' => 'ifRequest',
         'component' => 'firewallProcessor',
         'method' => 'ifRequestAuth'
     ],

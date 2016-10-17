@@ -59,7 +59,7 @@ class Processor {
      */
     public function resolve() {
         
-        $this->dispatcher->dispatch('ifRequestAuth', $this->request->getServerData('REQUEST_URI'));
+        $this->dispatcher->dispatch('ifRequest', $this->request->getServerData('REQUEST_URI'));
         
         $data = $this->route->resolveRoute();
         
