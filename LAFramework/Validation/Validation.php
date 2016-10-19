@@ -160,8 +160,8 @@ class Validation {
         
         if (count($this->vars)) {
             foreach ($this->vars as $key => $var) {
-                $rules = $this->rules[$key];
-                $clears = $this->clearRules[$key];
+                $rules = (isset($this->rules[$key])) ? $this->rules[$key] : [];
+                $clears = (isset($this->clearRules[$key])) ? $this->clearRules[$key] : [];
                 
                 if (count($rules) > 0) {
                     foreach ($rules as $ruleKey => $rule) {
