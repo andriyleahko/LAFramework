@@ -48,4 +48,21 @@ class Session {
         
     }
     
+    /**
+     * 
+     */
+    public function genereCSRF() {
+        
+        $_SESSION['csrf'] = md5('fasdf' . time() . 'sjdkleidn');
+           
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getCSRF() {
+        return (array_key_exists('csrf', $_SESSION)) ? $_SESSION['csrf'] : null;
+    }
+    
 }

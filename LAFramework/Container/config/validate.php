@@ -8,7 +8,8 @@ return [
                 'value' => [
                     'email' => '\LAFramework\Validation\Classes\Email',
                     'notEmpty' => '\LAFramework\Validation\Classes\NotEmpty',
-                    'length' => '\LAFramework\Validation\Classes\Length'    
+                    'length' => '\LAFramework\Validation\Classes\Length',    
+                    'csrf' => '\LAFramework\Validation\Classes\Csrf'    
                 ]
             ],
             'customValidationClasses' => [
