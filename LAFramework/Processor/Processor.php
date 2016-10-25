@@ -59,9 +59,6 @@ class Processor {
         $this->dispatcher = $dispatcher;
         
         $this->session->start();
-        if ($this->session->getCSRF() === null) {
-            $this->session->genereCSRF();
-        }
     }
     
     /**

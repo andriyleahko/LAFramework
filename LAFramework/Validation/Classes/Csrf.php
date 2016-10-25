@@ -27,11 +27,13 @@ class Csrf implements IValid {
         
         $session = $container->get('session');
         
+        if ($session->getCSRF() === null) {
+            return ['success' => false, 'error' => "csrf is not generate"];
+        }
+        
         if ($var != $session->getCSRF()) {
             return ['success' => false, 'error' => "csrf is not match"];
         }
-        
-        $session->genereCSRF();
         
         return ['success' => true];
     }
