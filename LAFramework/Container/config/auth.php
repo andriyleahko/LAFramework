@@ -34,6 +34,10 @@ return [
             'baseAuthProvider' => [
                 'type' => 'object',
                 'value' => 'baseAuthProvider'
+            ],
+            'validation' => [
+                'type' => 'object',
+                'value' => 'validation'
             ]
             
             
