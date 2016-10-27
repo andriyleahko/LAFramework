@@ -46,6 +46,13 @@ class Auth {
     private $validation;
     
     /**
+     *
+     * @var array | bool 
+     */
+    private $user = false;
+
+
+    /**
      * 
      * @param Session $session
      * @param Request $request
@@ -58,22 +65,30 @@ class Auth {
         $this->passCrypt = $passCrypt;
         $this->baseAuthProvider = $baseAuthProvider;
         $this->validation = $validation;
+        
+        $this->user = $this->session->getData('user');
                 
     }
     
     public function isAuth() {
         
-        return $this->session->getData('user');
+        return ($this->user !== false);
         
     }
     
-    /**
+    public function setUser($user) {
+        
+        $this->user = $user;
+        
+    }
+
+        /**
      * 
      * @return array
      */
     public function getAuthUser() {
         
-        return $this->session->getData('user');
+        return $this->user;
         
     }
     
@@ -112,8 +127,8 @@ class Auth {
             $user = $this->baseAuthProvider->getUserByEmail($this->validation->getVar('username'));
             
             if ($user and $user['pass'] == $this->passCrypt->crypt($this->validation->getVar('pass'))) {
-               $this->session->setData('isAuth', 1);
                $this->session->setData('user', $user);
+               $this->user = $user;
                $this->authHandler->onSuccess(); 
             } else {
                $this->authHandler->onFail('Bad credential'); 
