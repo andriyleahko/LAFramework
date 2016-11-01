@@ -2,6 +2,8 @@
 
 namespace LAFramework\View;
 
+use LAFramework\Container\Container;
+
 /**
  * class for display tamplate
  */
@@ -68,6 +70,8 @@ class View {
      * @return string
      */
     public function render($view) {
+        
+        $container = Container::init();
         
         extract($this->data);
 

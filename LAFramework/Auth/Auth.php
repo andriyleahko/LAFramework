@@ -76,6 +76,10 @@ class Auth {
         
     }
     
+    /**
+     * 
+     * @param array $user
+     */
     public function setUser($user) {
         
         $this->user = $user;

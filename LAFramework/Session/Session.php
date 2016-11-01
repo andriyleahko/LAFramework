@@ -65,4 +65,30 @@ class Session {
         return (array_key_exists('csrf', $_SESSION)) ? $_SESSION['csrf'] : null;
     }
     
+    /**
+     * 
+     * @param string $key
+     * @param mixin $value
+     */
+    public function setFlush($key, $value) {
+        $_SESSION[$key] = $value;
+    }
+    
+    /**
+     * 
+     * @param string $key
+     * @return mixin
+     */
+    public function getFlush($key) {
+        
+        if (array_key_exists($key, $_SESSION)) {
+            $res = $_SESSION[$key];
+            unset($_SESSION[$key]);
+            return $res;
+        }
+        
+        return null;
+        
+    }
+    
 }
