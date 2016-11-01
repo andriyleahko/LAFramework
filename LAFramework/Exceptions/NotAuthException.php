@@ -17,7 +17,7 @@ class NotAuthException extends \Exception implements IError  {
      * @param string $code
      * @param string $previous
      */
-    public function __construct($message, $code = null, $previous = null) {
+    public function __construct($message = null, $code = null, $previous = null) {
         $this->container = Container::init();
         parent::__construct($message, $code, $previous);
     }

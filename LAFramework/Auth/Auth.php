@@ -114,8 +114,8 @@ class Auth {
         $this->validation->setVars($this->request->getPost());
         
         $this->validation->setRule([
-            'username' => ['notEmpty','length' => ['min' => 3, 'max' => 20]],
-            'pass' => ['notEmpty','length' => ['min' => 3, 'max' => 20]],
+            'username' => ['notEmpty','length' => ['min' => 3, 'max' => 200], 'email'],
+            'pass' => ['notEmpty','length' => ['min' => 3, 'max' => 200]],
             '_csrf' => ['csrf','notEmpty']
         ]);
         
