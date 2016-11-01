@@ -8,6 +8,10 @@ functionals:
     - request class for filtering request data
     - base controller class
     - response class
+    - auth
+    - module profile
+    - validation
+    - exception
     - composer injection in project
     
 
