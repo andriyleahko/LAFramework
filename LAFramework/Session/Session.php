@@ -53,7 +53,7 @@ class Session {
      */
     public function genereCSRF() {
         
-        $_SESSION['csrf'] = md5('fasdf' . time() . 'sjdkleidn');
+        $_SESSION['csrf'] = md5('fasdf' . time() . 'sjdkleidn' . \LAFramework\Container\Config::getParam('salt'));
            
     }
     
