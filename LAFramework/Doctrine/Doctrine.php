@@ -18,6 +18,12 @@ class Doctrine {
     
     /**
      *
+     * @var string
+     */
+    private $typeEndityMap;
+    
+    /**
+     *
      * @var string 
      */
     private $entityPath;
@@ -39,7 +45,7 @@ class Doctrine {
      * @param array $dataBaseParams
      * @param string $entityPath
      */
-    public function __construct($dataBaseParams, $entityPath, $dbenable) {
+    public function __construct($dataBaseParams, $typeEndityMap, $entityPath, $dbenable) {
         
         $this->dbenable = $dbenable;
         
@@ -51,7 +57,19 @@ class Doctrine {
 
             $isDevMode = true;
 
-            $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
+            switch ($typeEndityMap) {
+                case 'annotation':
+                    $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
+                    break;
+                case 'xml':
+                    $config = Setup::createXMLMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
+                    break;
+                case 'yml':
+                    $config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/{$this->entityPath}"), $isDevMode);
+                    break;
+                default:
+                    break;
+            }
 
             $this->entityManager = EntityManager::create($this->dataBaseParams, $config);
         

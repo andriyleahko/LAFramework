@@ -13,8 +13,9 @@ return [
                     'dbname'   => '%dbname%',
                 ]
             ],
+            'typeEndityMap' => '%typeEntityMap%',
             'entityPath' => [
-                'value' => 'Entity'
+                'value' => '%entityDir%'
             ],
             'dbenable' => [
                 'value' => '%dbenable%'
