@@ -11,4 +11,10 @@ interface IProvider {
      */
     public function getUserByEmail($user);
     
+    /**
+     * 
+     * @param string $token
+     */
+    public function getUserByToken($token);
+    
 }

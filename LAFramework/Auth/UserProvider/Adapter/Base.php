@@ -32,24 +32,26 @@ class Base implements IProvider {
     /**
      * 
      * @param string $user
-     * @return null | array $user
+     * @return null | object $user
      */
     public function getUserByEmail($user) {
         $user = $this->doctrine->getEntityManager()->getRepository($this->table)->findOneBy(['username' => $user]);
         
-        if ($user) {
-            
-            return [
-                'username' => $user->getUsername(),
-                'pass' => $user->getPass(),
-                'roles' => $user->getRoles(),
-                'userObject' => $user
-            ];
-            
-        } 
-        
-        return null;
+        return ($user) ? $user : null;
+
     }
+    
+    /**
+     * 
+     * @param string $token
+     * @return object | null
+     */
+    public function getUserByToken($token) {
+        $user = $this->doctrine->getEntityManager()->getRepository($this->table)->findOneBy(['reseting_token' => $token]);
+        
+        return ($user) ? $user : null;
+    }
+    
     
     
 }

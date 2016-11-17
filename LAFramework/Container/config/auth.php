@@ -59,7 +59,7 @@ return [
         'class' => '\LAFramework\Auth\UserProvider\Adapter\Base',
         'params' => [
             'table' => [
-                'value' => '%userTable%'
+                'value' => '%userModel%'
             ],
             'doctrine' => [
                 'type' => 'object',
@@ -68,13 +68,5 @@ return [
             
         ],
     ],
-    'userDataAdapter' => [
-        'class' => '\LAFramework\Auth\UserProvider\Adapter\Data',
-        'params' => [
-            'data' => [
-                'value' => '%userData%'
-            ],
-            
-        ],
-    ]
+
 ];

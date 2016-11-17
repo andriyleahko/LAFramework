@@ -130,10 +130,14 @@ class Auth {
             
             $user = $this->baseAuthProvider->getUserByEmail($this->validation->getVar('username'));
             
-            if ($user and $user['pass'] == $this->passCrypt->crypt($this->validation->getVar('pass'))) {
-               $this->session->setData('user', $user);
-               $this->user = $user;
-               $this->authHandler->onSuccess(); 
+            if ($user and $user->getPass() == $this->passCrypt->crypt($this->validation->getVar('pass'))) {
+                if ($user->getResettingToken()) {
+                    $this->authHandler->onFail('User is blocked'); 
+                } else {
+                     $this->session->setData('user', $user);
+                     $this->user = $user;
+                    $this->authHandler->onSuccess(); 
+                }
             } else {
                $this->authHandler->onFail('Bad credential'); 
             }
@@ -146,8 +150,30 @@ class Auth {
         
     }
     
-
     /**
+     * 
+     * @param \LAFramework\Auth\LAFramework\Auth\Model\IUser $user
+     * @param string $pass
+     */
+    public function changePassword(LAFramework\Auth\Model\IUser $user, $pass) {
+        
+        $user->setPass($this->passCrypt->crypt($pass));
+    }
+    
+    /**
+     * 
+     * @param string $token
+     * @return null | object
+     */
+    public function resetPassword($token) {
+        
+        $user = $this->baseAuthProvider->getUserByToken($token);
+        
+        return ($user) ? $user : null;
+        
+    }
+
+        /**
      * @return bool
      */
     public function logout() {

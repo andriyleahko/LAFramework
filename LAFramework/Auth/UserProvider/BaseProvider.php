@@ -29,6 +29,14 @@ class BaseProvider {
     public function getUserByEmail($user) {
         return $this->adapter->getUserByEmail($user);
     }
+    /**
+     * 
+     * @param string $token
+     * @return object | null
+     */
+    public function getUserByToken($token) {
+        return $this->adapter->getUserByToken($token);
+    }
     
     
 }
