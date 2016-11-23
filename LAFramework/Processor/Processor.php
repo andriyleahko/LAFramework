@@ -90,6 +90,10 @@ class Processor {
         
         $instance = new $controllerData['controller']();
         
+        if ($this->response->isResponse()) {
+            return;
+        }
+        
         if (!method_exists($instance, $controllerData['method'])) {
             throw new NotFoundException("method for route {$controllerKey} is not exists");
         }
