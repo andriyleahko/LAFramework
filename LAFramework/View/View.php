@@ -64,12 +64,14 @@ class View {
         
     }
 
+
     /**
      * 
      * @param string $view
+     * @param bool $nowrap
      * @return string
      */
-    public function render($view) {
+    public function render($view, $nowrap = false) {
         
         $container = Container::init();
         
@@ -80,6 +82,10 @@ class View {
         include_once $this->templatePath . $view . '.php';
         
         $content = ob_get_clean();
+        
+        if ($nowrap) {
+            return $content;
+        }
 
         ob_start();        
         
@@ -91,6 +97,6 @@ class View {
         
         return $result;
         
-    }
+    }    
     
 }

@@ -55,26 +55,25 @@ class Firewall {
         }
         
         if (!$this->auth->isAuth()) {
-            $userRole = [];
+            $userRole = ['Anonim'];
         }
         
         if (!$this->auth->isAuth() and is_array($denied) and in_array('Anonim', $denied)) {
             throw new NotAuthException('you have not rule for run this route');
         }
         
-
         
-        if (($this->auth->getAuthUser() and !isset($this->auth->getAuthUser()['role'])) 
-                or ($this->auth->getAuthUser() and isset($this->auth->getAuthUser()['role']) and $this->auth->getAuthUser()['role'] == null)
-                    or ($this->auth->getAuthUser() and isset($this->auth->getAuthUser()['role']) and is_array($this->auth->getAuthUser()['role']) and count($this->auth->getAuthUser()['role']) == 0)) {
+        if (($this->auth->getAuthUser() and !$this->auth->getAuthUser()->getRoles()) 
+                or ($this->auth->getAuthUser() and $this->auth->getAuthUser()->getRoles() and $this->auth->getAuthUser()->getRoles() == null)
+                    or ($this->auth->getAuthUser() and $this->auth->getAuthUser()->getRoles() and is_array($this->auth->getAuthUser()->getRoles()) and count($this->auth->getAuthUser()->getRoles()) == 0)) {
             $userRole = ['User'];
         }
         
-        if ($this->auth->getAuthUser() and isset($this->auth->getAuthUser()['role']) and is_array($this->auth->getAuthUser()['role'])) {
-            $userRole = $this->auth->getAuthUser()['role'];
+        if ($this->auth->getAuthUser() and $this->auth->getAuthUser()->getRoles() and is_array($this->auth->getAuthUser()->getRoles()) and count($this->auth->getAuthUser()->getRoles()) != 0) {
+            $userRole = $this->auth->getAuthUser()->getRoles();
         }
         
-        $userRole[] = 'Anonim';       
+             
         
         if (is_array($denied)) {
             foreach ($userRole as $ur) {
